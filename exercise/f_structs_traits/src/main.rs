@@ -5,7 +5,7 @@
 // `cargo run` without any errors.
 //
 //  trait Bite...
-
+use f_structs_traits::{Bite, Grapes, bunny_nibbles};
 
 // 2. Now create a struct named Grapes with a field that tracks how many grapes are left.  If you
 // need a hint, look at how it was done for Carrot at the bottom of this file (you should probably
@@ -30,9 +30,9 @@ fn main() {
     // 4. Uncomment and adjust the code below to match how you defined your
     // Grapes struct.
     //
-    //let mut grapes = Grapes { amount_left: 100 };
-    //grapes.bite();
-    //println!("Eat a grape: {:?}", grapes);
+    let mut grapes = Grapes { left: 100 };
+    grapes.bite();
+    println!("Eat a grape: {:?}", grapes);
 
     // Challenge: Uncomment the code below. Create a generic `bunny_nibbles`
     // function that:
@@ -41,8 +41,8 @@ fn main() {
     // Hint: Define the generic type between the function name and open paren:
     //       fn function_name<T: Bite>(...)
     //
-    //bunny_nibbles(&mut carrot);
-    //println!("Bunny nibbles for awhile: {:?}", carrot);
+    bunny_nibbles(&mut carrot);
+    println!("Bunny nibbles for awhile: {:?}", carrot);
 }
 
 #[derive(Debug)] // This enables using the debugging format string "{:?}"

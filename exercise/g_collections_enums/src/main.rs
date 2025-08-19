@@ -1,6 +1,13 @@
 // Silence some warnings that could distract from the exercise
 #![allow(unused_variables, unused_mut, dead_code)]
 
+
+enum Shot {
+    Bullseye,
+    Hit(f64),
+    Miss,
+}
+
 // Someone is shooting arrows at a target.  We need to classify the shots.
 //
 // 1a. Create an enum called `Shot` with variants:
@@ -18,6 +25,17 @@ impl Shot {
         // - return 2 points if `self` is a `Shot::Hit(x)` where x < 3.0
         // - return 1 point if `self` is a `Shot::Hit(x)` where x >= 3.0
         // - return 0 points if `self` is a Miss
+        match self {
+            Self::Bullseye => 5,
+            Self::Miss => 0,
+            Self::Hit(x) => {
+                if x < 3.0 {
+                    2
+                } else {
+                    1
+                }
+            }
+        }
     }
 }
 
@@ -35,9 +53,24 @@ fn main() {
     //      - Between 1.0 and 5.0 -- `Shot::Hit(value)`
     //      - Greater than 5.0 -- `Shot::Miss`
 
+    for cord in arrow_coords {
+        cord.print_description();
+        let val = cord.distance_from_center();
+        if val > 5.0 {
+            shots.push(Shot::Miss);
+        } else if val < 1.0 {
+            shots.push(Shot::Bullseye);
+        } else {
+            shots.push(Shot::Hit(val));
+        }
+    }
+
 
     let mut total = 0;
     // 3. Finally, loop through each shot in shots and add its points to total
+    for shot in shots {
+        total += shot.points();
+    }
 
     println!("Final point total is: {}", total);
 }
